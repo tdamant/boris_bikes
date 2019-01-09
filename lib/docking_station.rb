@@ -8,7 +8,11 @@ class DockingStation
   end
 
   def release_bike
-    Bike.new
+    if !@docked_bikes.empty?
+    @docked_bikes.pop
+  else
+    fail "no bikes"
+  end
   end
 
   def dock(bike)
