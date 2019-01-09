@@ -12,10 +12,16 @@ class DockingStation
   end
 
   def release_bike
-    !empty? ? @docked_bikes.pop : fail("no bikes")
+    if empty?
+      fail("no bikes")
+    elsif !@docked_bikes[-1].condition
+      fail("bike is broken")
+    else
+      @docked_bikes.pop
+    end
   end
 
-  def dock(bike, condition= true)
+  def dock(bike, condition=true)
     !full? ? @docked_bikes << bike : fail("dock is full")
     bike.condition = condition
     self
