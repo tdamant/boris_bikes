@@ -1,6 +1,17 @@
 require 'docking_station'
 
 describe DockingStation do
+
+  it "Passing an interger to DockingStation.new should change the capacity of the docking station" do
+    station = DockingStation.new(12)
+    expect(station.capacity).to eq 12
+  end
+
+  it "If we don't pass an argument to DockingStation.new the capacity should = 20" do
+    station = DockingStation.new
+    expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
   it "should return an instance of the Bike class when .release_bike method is called" do
     station = subject.dock(Bike.new)
     expect(station.release_bike).to be_instance_of(Bike)
@@ -22,8 +33,8 @@ describe DockingStation do
 
   it "the program won't allow us to add more bikes than the station has capacity for" do
     station = subject
-    expect{ 2.times { station.dock(Bike.new) } }.to_not raise_error
-    expect{ 19.times { station.dock(Bike.new) } }.to raise_error "dock is full"
+    expect{ (station.capacity).times { station.dock(Bike.new) } }.to_not raise_error
+    expect{ station.dock(Bike.new) }.to raise_error "dock is full"
   end
 
 
