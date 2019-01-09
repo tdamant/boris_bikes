@@ -37,6 +37,11 @@ describe DockingStation do
     expect{ station.dock(Bike.new) }.to raise_error "dock is full"
   end
 
+it "dock accepts the condition of the bike when returned" do
+ station = subject
+ expect(station).to respond_to(:dock).with(2).arguments
+end
+
 
 
 end
