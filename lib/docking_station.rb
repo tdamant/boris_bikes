@@ -1,3 +1,5 @@
+require_relative 'bike'
+
 class DockingStation
   attr_reader :docked_bikes
 
@@ -11,12 +13,7 @@ class DockingStation
 
   def dock(bike)
     @docked_bikes << bike
+    return self
   end
 
-end
-
-class Bike
-  def working?
-    true
-  end
 end
