@@ -1,5 +1,4 @@
 require 'bike'
-require 'docking_station.rb'
 
 describe Bike do
 

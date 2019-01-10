@@ -14,20 +14,15 @@ describe DockingStation do
   end
 
   it "should return an instance of the Bike class when .release_bike method is called" do
-    #allow(bike).to receive(:condition).and_return(true)
-    station = subject.dock(working_bike)
-    expect(station.release_bike).to be_instance_of(working_bike.class)
+    expect(subject.dock(working_bike).release_bike).to be_instance_of(working_bike.class)
   end
 
   it "bikes should be working when released" do
-    #allow(bike).to receive(:condition).and_return(true)
-    station = subject.dock(working_bike)
-    expect(station.release_bike.condition).to eq true
+    expect(subject.dock(working_bike).release_bike.condition).to eq true
   end
 
   it "docked_bikes should return a bike, if there is one" do
-    station = subject.dock(working_bike)
-    expect(station.docked_bikes.include?(working_bike)).to eq true
+    expect(subject.dock(working_bike).docked_bikes.include?(working_bike)).to eq true
   end
 
   it 'throws an error when trying to release bike and no bikes in station' do
@@ -40,9 +35,7 @@ describe DockingStation do
   end
 
   it "the dock should not release a bike if it's broken" do
-    #allow(bike).to receive(:condition).and_return(false)
-    station = subject.dock(broken_bike)
-    expect{ station.release_bike }.to raise_error "bike is broken"
+    expect{ subject.dock(broken_bike).release_bike }.to raise_error "bike is broken"
   end
 
 end

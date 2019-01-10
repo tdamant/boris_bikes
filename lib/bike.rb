@@ -1,4 +1,3 @@
-
 class Bike
 attr_reader :condition
 
