@@ -1,16 +1,10 @@
 require 'bike'
 require 'docking_station.rb'
+
 describe Bike do
 
-  it 'does the bike have a condition attribute?' do
-    expect(subject).to respond_to(:condition)
-  end
-
-  it "condition should equal the condition passed to DockingStation.dock method" do
-    station = DockingStation.new
-    bike = Bike.new
-    station.dock(bike, false)
-    expect(bike.condition).to eq false
+  it "calling the is_broken method on a bike object will change that bike's condition to false" do
+    expect(subject.is_broken.condition).to eq false
   end
 
 end

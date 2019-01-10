@@ -1,12 +1,14 @@
 
 class Bike
-attr_accessor :condition
+attr_reader :condition
 
-def initialize(condition=true)
-@condition = condition
-end
-
-  def working?
-    @condition
+  def initialize(condition=true)
+  @condition = condition
   end
+
+  def is_broken
+    @condition = false
+    self
+  end
+
 end

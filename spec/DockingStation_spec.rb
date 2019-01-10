@@ -16,9 +16,10 @@ describe DockingStation do
     station = subject.dock(Bike.new)
     expect(station.release_bike).to be_instance_of(Bike)
   end
+
   it "bikes should be working when released" do
     station = subject.dock(Bike.new)
-    expect(station.release_bike.working?).to eq true
+    expect(station.release_bike.condition).to eq true
   end
 
   it "docked_bikes should return a bike, if there is one" do
@@ -37,14 +38,9 @@ describe DockingStation do
     expect{ station.dock(Bike.new) }.to raise_error "dock is full"
   end
 
-  it "dock accepts the condition of the bike when returned" do
-   station = subject
-   expect(station).to respond_to(:dock).with(2).arguments
-  end
-
   it "the dock should not release a bike if it's broken" do
     bike = Bike.new
-    station = subject.dock(bike, false)
+    station = subject.dock(bike.is_broken)
     expect{ station.release_bike }.to raise_error "bike is broken"
   end
 

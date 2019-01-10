@@ -12,29 +12,29 @@ class DockingStation
   end
 
   def release_bike
-    if empty?
-      fail("no bikes")
-    elsif !@docked_bikes[-1].condition
-      fail("bike is broken")
-    else
-      @docked_bikes.pop
-    end
+    empty?
+    last_is_broken?
+    @docked_bikes.pop
   end
 
-  def dock(bike, condition=true)
-    !full? ? @docked_bikes << bike : fail("dock is full")
-    bike.condition = condition
+  def dock(bike)
+    full?
+    @docked_bikes << bike
     self
   end
 
   private
 
   def full?
-    @docked_bikes.length == @capacity
+    fail("dock is full") if @docked_bikes.length == @capacity
+  end
+
+  def last_is_broken?
+    fail("bike is broken") if !@docked_bikes[-1].condition
   end
 
   def empty?
-    @docked_bikes.length == 0
+    fail("no bikes") if @docked_bikes.length == 0
   end
 
 end
