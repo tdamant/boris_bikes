@@ -3,7 +3,9 @@ require 'docking_station'
 describe DockingStation do
 
   let(:working_bike) { double(:condition => true) }
-  let(:broken_bike) { double(:condition => false) }
+  let(:broken_bike_1) { double(:condition => false) }
+  let(:broken_bike_2) { double(:condition => false) }
+
 
   it "Passing an interger to DockingStation.new should change the capacity of the docking station" do
     expect(DockingStation.new(12).capacity).to eq 12
@@ -35,7 +37,18 @@ describe DockingStation do
   end
 
   it "the dock should not release a bike if it's broken" do
-    expect{ subject.dock(broken_bike).release_bike }.to raise_error "bike is broken"
+    expect{ subject.dock(broken_bike_1).release_bike }.to raise_error "bike is broken"
+  end
+
+  it "can release broken bikes when asked" do
+    station = subject.dock(broken_bike_1).dock(broken_bike_2).dock(working_bike)
+    expect(station.release_broken_bikes).to eq [broken_bike_1, broken_bike_2]
+  end
+
+  it "removes released bikes from docking station" do
+    station = subject.dock(broken_bike_1).dock(broken_bike_2).dock(working_bike)
+    station.release_broken_bikes
+    expect(station.docked_bikes).to eq [working_bike]
   end
 
 end

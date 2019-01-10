@@ -11,6 +11,12 @@ class DockingStation
     @capacity= capacity
   end
 
+  def release_broken_bikes
+    bikes_released = @docked_bikes.select {|bike| !bike.condition }
+    bikes_released.each{|bike| @docked_bikes.delete(bike)}
+    bikes_released
+  end
+
   def release_bike
     empty?
     last_is_broken?
