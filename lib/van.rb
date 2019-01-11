@@ -1,4 +1,4 @@
-require_relative 'docking_station'
+# require_relative 'docking_station'
 
 class Van
 
@@ -9,7 +9,7 @@ class Van
   end
 
   def pick_up_bikes(station)
-    station.docked_bikes.each { |bike| @bikes_in_van << bike if !bike.condition }
+    @bikes_in_van = station.release_broken_bikes
     self
   end
 

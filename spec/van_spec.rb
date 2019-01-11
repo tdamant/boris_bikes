@@ -3,7 +3,7 @@ require 'van'
 describe Van do
   let(:working_bike) { double(:condition => true) }
   let(:broken_bike) { double(:condition => false) }
-  let(:station) { double(:docked_bikes => [working_bike, broken_bike])}
+  let(:station) { double(:docked_bikes => [working_bike, broken_bike], :release_broken_bikes => [broken_bike])}
   let(:garage) { double :garage }
 
   it "can load broken bikes from docking stations" do

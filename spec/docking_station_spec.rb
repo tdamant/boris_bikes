@@ -40,7 +40,7 @@ describe DockingStation do
     expect{ subject.dock(broken_bike_1).release_bike }.to raise_error "bike is broken"
   end
 
-  it "can release broken bikes when asked" do
+  it "releases broken bikes when asked" do
     station = subject.dock(broken_bike_1).dock(broken_bike_2).dock(working_bike)
     expect(station.release_broken_bikes).to eq [broken_bike_1, broken_bike_2]
   end
